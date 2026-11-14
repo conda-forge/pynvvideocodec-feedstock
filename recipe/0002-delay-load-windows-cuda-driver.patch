@@ -1,0 +1,18 @@
+Delay loading the Windows CUDA driver until a driver function is called.
+This allows direct extension import tests on CI runners without NVIDIA drivers.
+
+--- a/src/PyNvVideoCodec/CMakeLists.txt
++++ b/src/PyNvVideoCodec/CMakeLists.txt
+@@ -139,6 +139,12 @@
+         target_link_libraries(${TARGET_NAME} PUBLIC VideoCodecSDKUtils${VERSION_SUFFIX})
+     endif()
+ 
++    if(MSVC AND NOT DEMUX_ONLY)
++        # Importing the extension must not require an installed NVIDIA driver.
++        target_link_options(${TARGET_NAME} PRIVATE "/DELAYLOAD:nvcuda.dll")
++        target_link_libraries(${TARGET_NAME} PRIVATE delayimp)
++    endif()
++
+     if(DEMUX_ONLY)
+         if(NV_FFMPEG_HAS_BSF)
+             target_compile_definitions(${TARGET_NAME} PUBLIC -DHAS_BSF=1)

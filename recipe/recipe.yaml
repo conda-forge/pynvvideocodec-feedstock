@@ -11,6 +11,7 @@ source:
   sha256: 29f7c0694d683266c563aca9a4f8e979ba0c5dce8f0ccc1efe500073e0948be0
   patches:
     - 0001-use-conda-dependencies.patch
+    - 0002-delay-load-windows-cuda-driver.patch
 
 build:
   number: 1
