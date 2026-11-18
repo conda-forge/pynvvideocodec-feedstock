@@ -62,7 +62,7 @@ requirements:
 tests:
   - script:
       - python -m pip check
-      - python test_extensions.py
+      - python test_extensions.py --version ${{ version }}
     requirements:
       run:
         - pip
