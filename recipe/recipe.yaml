@@ -1,5 +1,5 @@
 context:
-  version: "2.2.3"
+  version: "2.2.4"
   cuda_build_string: cuda${{ cuda_compiler_version | version_to_buildstring }}
 
 package:
@@ -8,13 +8,13 @@ package:
 
 source:
   url: https://api.ngc.nvidia.com/v2/resources/nvidia/pynvvideocodec/versions/v${{ version }}/files/PyNvVideoCodec_${{ version }}.zip
-  sha256: 29f7c0694d683266c563aca9a4f8e979ba0c5dce8f0ccc1efe500073e0948be0
+  sha256: d813fc2e55d7c657f598427b6e4dcebed6ba40789d6263c9b51d480292190ed2
   patches:
     - 0001-use-conda-dependencies.patch
     - 0002-delay-load-windows-cuda-driver.patch
 
 build:
-  number: 2
+  number: 0
   string: ${{ cuda_build_string }}_py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
   skip:
     - cuda_compiler_version == "None"
